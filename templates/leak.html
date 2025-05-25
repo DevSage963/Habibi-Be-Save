@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass-card">
+  <h2>Datenleck prüfen</h2>
+  <form method="POST" action="/leak">
+    <label for="password">Passwort eingeben</label>
+    <input type="password" id="password" name="password" required autocomplete="off" minlength="1" maxlength="128" />
+
+    <div class="form-group">
+      <label class="toggle-label">
+        <input type="checkbox" onclick="togglePassword()"> Passwort anzeigen
+      </label>
+    </div>
+
+    <button type="submit">Prüfen</button>
+  </form>
+
+  {% if leak_checked %}
+    {% if leak_found %}
+    <div class="result-box leak-warning">
+      <div class="result-header">
+        <p>⚠️ Dein Passwort wurde <strong>{{ leak_count }}</strong> Mal in Datenlecks gefunden:</p>
+        <button class="copy-btn" onclick="copyToClipboard('{{ password }}')">Kopieren</button>
+      </div>
+      <ul class="leak-list">
+        {% for leakname in leak_names %}
+          <li>{{ leakname }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <div class="result-box leak-safe">
+      <p>👍 Dein Passwort wurde in keinen bekannten Datenlecks gefunden.</p>
+    </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+<script>
+function togglePassword() {
+  const pwInput = document.getElementById('password');
+  pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => alert('Passwort kopiert!'));
+}
+</script>
+{% endblock %}

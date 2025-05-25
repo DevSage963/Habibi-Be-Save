@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass-card" style="text-align: center;">
+  <h1>Willkommen bei <span>Habibi-Be-Save!</span></h1>
+  <p>Dein ultimativer Sicherheits-Toolkit für Passwörter & mehr – stylisch, sicher, smart.</p>
+</div>
+
+<div class="glass-card">
+  <h2>Was möchten Sie tun?</h2>
+  <ul style="list-style:none; padding-left:0;">
+    <li style="margin-bottom: 1rem;">
+      <a href="/check">🔍 Passwort auf Sicherheit prüfen</a>
+    </li>
+    <li style="margin-bottom: 1rem;">
+      <a href="/generate">🛠️ Sicheres Passwort generieren</a>
+    </li>
+    <li style="margin-bottom: 1rem;">
+      <a href="/hash">🔐 Text verschlüsseln (Hash)</a>
+    </li>
+    <li>
+      <a href="/leak">🔓 Datenleck prüfen</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
